@@ -43,43 +43,51 @@ int find_builtin(info_t *info)
  */
 void find_cmd(info_t *info)
 {
-    char *path = NULL;
-    int i;
+	char *path = NULL; // Stores the path to the executable
+	int i, k; // Loop counters
 
-    for (i = 0; info->env[i]; i++)
-    {
-        if (_strncmp(info->env[i], "PATH=", 5) == 0)
-        {
-            path = _strdup(info->env[i] + 5);
-            break;
-        }
-    }
+	info->path = info->argv[0]; // Initialize path with the command name
+	if (info->linecount_flag == 1)
+	{
+		info->line_count++; // Increment line count if linecount_flag is set
+		info->linecount_flag = 0; // Reset linecount_flag
+	}
 
-    if (path == NULL)
-        return; // Could not find PATH in the environment
+	k = 0; // Initialize k to count non-delimiter characters
+	for (i = 0; info->arg[i]; i++)
+	{
+		if (!is_delim(info->arg[i], " \t\n"))
+		{
+			k++; // Increment k for non-delimiter characters
+		}
+	}
 
-    char *token, *cmd_path;
-    char *saveptr = NULL;
+	if (!k)
+	{
+		return; // If no non-delimiter characters, return
+	}
 
-    token = _strtok_r(path, ":", &saveptr);
-    while (token != NULL)
-    {
-        cmd_path = _strcat(_strcat(token, "/"), info->argv[0]);
-        if (access(cmd_path, F_OK) == 0)
-        {
-            info->path = cmd_path;
-            free(path);
-            return; // Found the executable
-        }
-        free(cmd_path);
-        token = _strtok_r(NULL, ":", &saveptr);
-    }
-
-    free(path);
-    _eputs("Command not found\n");
-    info->path = NULL;
+	// Find the executable's path in the PATH environment variable
+	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	if (path)
+	{
+		info->path = path; // Set path to the found executable
+		fork_cmd(info); // Execute the command
+	}
+	else
+	{
+		if ((interactive(info) || _getenv(info, "PATH=")
+					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
+		{
+			fork_cmd(info); // Execute the command if it's an absolute path or built-in
+		}
+		else if (*(info->arg) != '\n')
+		{
+			info->status = 127; // Set exit status to indicate command not found
+			print_error(info, "not found\n"); // Print error message
+		}
+	}
 }
-
 /**
  * fork_cmd - Forks an exec thread to run a command.
  * @info: The parameter & return info struct.
