@@ -43,8 +43,41 @@ int find_builtin(info_t *info)
  */
 void find_cmd(info_t *info)
 {
-	info->path = info->argv[0];
-	/* ... */
+    char *path = NULL;
+    int i;
+
+    for (i = 0; info->env[i]; i++)
+    {
+        if (_strncmp(info->env[i], "PATH=", 5) == 0)
+        {
+            path = _strdup(info->env[i] + 5);
+            break;
+        }
+    }
+
+    if (path == NULL)
+        return; // Could not find PATH in the environment
+
+    char *token, *cmd_path;
+    char *saveptr = NULL;
+
+    token = _strtok_r(path, ":", &saveptr);
+    while (token != NULL)
+    {
+        cmd_path = _strcat(_strcat(token, "/"), info->argv[0]);
+        if (access(cmd_path, F_OK) == 0)
+        {
+            info->path = cmd_path;
+            free(path);
+            return; // Found the executable
+        }
+        free(cmd_path);
+        token = _strtok_r(NULL, ":", &saveptr);
+    }
+
+    free(path);
+    _eputs("Command not found\n");
+    info->path = NULL;
 }
 
 /**
