@@ -26,7 +26,7 @@ int _mycd(info_t *info)
 
 	current_path = getcwd(buffer, 1024);
 	if (!current_path)
-		_puts("TODO: Handle getcwd failure message here.\n");
+		_puts("TODO: >>getcwd failure emsg here<<\n");
 
 	/* Handle change to home directory */
 	if (!info->argv[1])
@@ -79,7 +79,7 @@ int _myhelp(info_t *info)
 	char **arg_array;
 
 	arg_array = info->argv;
-	_puts("Help function is not implemented yet.\n");
+	_puts("help call works. Function not yet implemented \n");
 	if (0)
 		_puts(*arg_array); /* Temporary unused workaround */
 	return (0);
