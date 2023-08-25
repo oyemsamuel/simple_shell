@@ -1,4 +1,5 @@
 #include "shell.h"
+void fork_cmd(info_t *info)
 
 /**
  * find_builtin - Finds a builtin command.
