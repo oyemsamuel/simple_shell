@@ -18,7 +18,7 @@
 #define CMD_CHAIN	3
 #define CMD_OR		1
 
-#define MAX_ALLOWED_FD 100
+#define MAX_ALLOWED_FD 2
 
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
