@@ -20,7 +20,6 @@ char *_strncpy(char *dest, char *src, int n)
 		dest[i] = src[i];
 		i++;
 	}
-	
 	/* Fill remaining characters in dest with '\0' */
 	if (i < n)
 	{
@@ -60,7 +59,6 @@ char *_strncat(char *dest, char *src, int n)
 		i++;
 		j++;
 	}
-	
 	/* Ensure the destination string is null-terminated */
 	if (j < n)
 		dest[i] = '\0';

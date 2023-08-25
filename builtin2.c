@@ -70,7 +70,7 @@ int print_alias(list_t *node)
 /**
  * _myalias - Mimic the alias builtin command.
  * @info: Pointer to the structure containing potential arguments.
- *        Used to manage alias commands.
+ * Used to manage alias commands.
  * Return: Always 0
  */
 int _myalias(info_t *info)
@@ -95,7 +95,7 @@ int _myalias(info_t *info)
 		if (p)
 			set_alias(info, info->argv[i]); /* Set or update alias */
 		else
-			print_alias(node_starts_with(info->alias, info->argv[i], '=')); /* Print specific alias */
+			print_alias(node_starts_with(info->alias, info->argv[i], '='));
 	}
 
 	return (0);
@@ -103,7 +103,7 @@ int _myalias(info_t *info)
 /**
  * _myexit - Terminate the shell
  * @info: Pointer to the structure containing potential arguments.
- *        This pointer is used to maintain the consistency of function prototypes.
+ * This pointer is used to maintain the consistency of function prototypes.
  * Return: Exit status: 0 if info->argv[0] is not "exit"
  */
 int _myexit(info_t *info)

@@ -3,7 +3,7 @@
 /**
  * _myhistory - Display the history list with line numbers.
  * @info: Pointer to the structure containing potential arguments.
- *        Used to determine whether shell is in interactive mode.
+ * Used to determine whether shell is in interactive mode.
  * Return: Always 0
  */
 int _myhistory(info_t *info)
@@ -16,7 +16,7 @@ int _myhistory(info_t *info)
 /**
  * _mycd - Change the current directory of the shell process
  * @info: Pointer to the structure containing potential arguments.
- *        This pointer is used to maintain the consistency of function prototypes.
+ * This pointer is used to maintain the consistency of function prototypes.
  * Return: Always 0
  */
 int _mycd(info_t *info)
@@ -27,9 +27,7 @@ int _mycd(info_t *info)
 	current_path = getcwd(buffer, 1024);
 	if (!current_path)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
-
-	/* Handle change to home directory */
-	if (!info->argv[1])
+	if (!info->argv[1])/* Handle change to home directory */
 	{
 		target_dir = _getenv(info, "HOME=");
 		if (!target_dir)
@@ -38,8 +36,7 @@ int _mycd(info_t *info)
 		else
 			chdir_result = chdir(target_dir);
 	}
-	/* Handle change to previous directory */
-	else if (_strcmp(info->argv[1], "-") == 0)
+	else if (_strcmp(info->argv[1], "-") == 0)/* Handle change to previous dir */
 	{
 		if (!_getenv(info, "OLDPWD="))
 		{
@@ -53,9 +50,7 @@ int _mycd(info_t *info)
 	}
 	else
 		chdir_result = chdir(info->argv[1]);
-
-	/* Handle chdir error or success */
-	if (chdir_result == -1)
+	if (chdir_result == -1)/* Handle chdir error or success */
 	{
 		print_error(info, "Cannot change directory to ");
 		_eputs(info->argv[1]), _eputchar('\n');
@@ -71,7 +66,7 @@ int _mycd(info_t *info)
 /**
  * _myhelp - Display help information
  * @info: Pointer to the structure containing potential arguments.
- *        This pointer is used to maintain the consistency of function prototypes.
+ * This pointer is used to maintain the consistency of function prototypes.
  * Return: Always 0
  */
 int _myhelp(info_t *info)

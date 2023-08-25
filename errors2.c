@@ -9,7 +9,7 @@
  */
 void print_error(info_t *info, char *estr)
 {
-	/* Print error details: filename, line number, command name, and error type */
+	/* details: filename, line number, command name, and error type */
 	_eputs(info->fname);
 	_eputs(": ");
 	print_d(info->line_count, STDERR_FILENO);
@@ -47,7 +47,6 @@ int print_d(int input, int fd)
 		_abs_ = input;
 
 	current = _abs_;
-	
 	/* Print each digit of the number */
 	for (i = 1000000000; i > 1; i /= 10)
 	{
@@ -145,7 +144,6 @@ int _erratoi(char *s)
 		{
 			result *= 10;
 			result += (s[i] - '0');
-			
 			/* Check for integer overflow */
 			if (result > INT_MAX)
 				return (-1);

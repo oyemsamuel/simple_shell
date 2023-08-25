@@ -4,7 +4,7 @@
  * _eputchar - Writes the character c to the standard error (stderr).
  * @c: The character to print.
  *
- * Return: On success 1. On error, -1 is returned, and errno is set appropriately.
+ * Return: On success 1. On error, -1 is returned, and errno is set appr..
  */
 int _eputchar(char c)
 {
@@ -30,7 +30,7 @@ int _eputchar(char c)
  * @c: The character to print.
  * @fd: The file descriptor to write to.
  *
- * Return: On success 1. On error, -1 is returned, and errno is set appropriately.
+ * Return: On success 1. On error, -1 is returned, and errno is set appr.
  */
 int _putfd(char c, int fd)
 {

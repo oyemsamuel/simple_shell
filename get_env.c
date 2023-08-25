@@ -75,7 +75,7 @@ int _setenv(info_t *info, char *var, char *value)
 }
 
 /**
- * get_environ - Returns a copy of the string array representing the environment.
+ * get_environ - Returns a copy of the string array representing the enviro.
  * @info: Parameter struct containing potential arguments and environment info.
  *
  * Return: Copy of the environment strings.
