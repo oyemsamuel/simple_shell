@@ -15,7 +15,7 @@ int write_history(info_t *info)
 	if (!filename)
 		return (-1);
 
-	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644); /* Open history file for writing */
+	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644); /* Open for writing */
 	free(filename);
 	if (fd == -1)
 		return (-1);
@@ -65,14 +65,14 @@ int read_history(info_t *info)
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
-			build_history_list(info, buf + last, linecount++); /* Build history list from read entries */
+			build_history_list(info, buf + last, linecount++); /* Build list */
 			last = i + 1;
 		}
 	if (last != i)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);
 	info->histcount = linecount;
-	while (info->histcount-- >= HIST_MAX) /* Trim history list to HIST_MAX entries */
+	while (info->histcount-- >= HIST_MAX) /* Trim list to HIST_MAX entries */
 		delete_node_at_index(&(info->history), 0);
 	renumber_history(info); /* Renumber the history entries */
 	return (info->histcount);
@@ -92,7 +92,7 @@ int build_history_list(info_t *info, char *buf, int linecount)
 
 	if (info->history)
 		node = info->history;
-	add_node_end(&node, buf, linecount); /* Add the history entry to the linked list */
+	add_node_end(&node, buf, linecount); /* Adding entry to the linked list */
 
 	if (!info->history)
 		info->history = node;
@@ -128,7 +128,7 @@ char *get_history_file(info_t *info)
 {
 	char *buf, *dir;
 
-	dir = _getenv(info, "HOME="); /* Get the HOME directory from the environment */
+	dir = _getenv(info, "HOME="); /* Get the HOME directory from the enviro. */
 	if (!dir)
 		return (NULL);
 	buf = malloc(sizeof(char) * (_strlen(dir) + _strlen(HIST_FILE) + 2));
@@ -137,6 +137,6 @@ char *get_history_file(info_t *info)
 	buf[0] = 0;
 	_strcpy(buf, dir);
 	_strcat(buf, "/");
-	_strcat(buf, HIST_FILE); /* Concatenate the HOME directory and history file name */
+	_strcat(buf, HIST_FILE); /* Concat the HOME directory and history file name */
 	return (buf);
 }

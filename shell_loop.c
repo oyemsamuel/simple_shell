@@ -5,9 +5,9 @@
  * @info: The parameter & return info struct containing shell information
  * @av: The argument vector from main()
  *
- * This function implements the main loop of the shell. It repeatedly reads user
- * input, processes commands, and executes them until the user exits or an error occurs.
- *
+ * This function implements the main loop of the shell. and repeat reads user
+ * input, processes commands, and executes them until the user exits
+ * or an error occurs.
  * Return: 0 on success, 1 on error, or an error code
  */
 int hsh(info_t *info, char **av)
@@ -51,8 +51,8 @@ int hsh(info_t *info, char **av)
  * @info: The parameter & return info struct containing command information
  *
  * This function searches for a built-in command in the provided info struct's
- * arguments. If a match is found, it executes the corresponding built-in function.
- *
+ * arguments. If a match is found, it executes the
+ * corresponding built-in function.
  * Return: -1 if builtin not found,
  *         0 if builtin executed successfully,
  *         1 if builtin found but not successful,
@@ -80,16 +80,16 @@ int find_builtin(info_t *info)
 			built_in_ret = builtintbl[i].func(info);
 			break;
 		}
-	return (built_in_ret); /* Return the result of the builtin command execution */
+	return (built_in_ret); /* Returns result of the builtin command execution */
 }
 
 /**
  * find_cmd - Finds and executes a command in PATH
  * @info: The parameter & return info struct containing command information
  *
- * This function searches for the specified command in the directories listed in
- * the PATH environment variable. If found, it executes the command with the given
- * arguments. If not found, it prints an error message.
+ * This function search for the specified command in the directories listed in
+ * the PATH environment variable. If found, it executes the command with the
+ * given arguments. If not found, it prints an error message.
  */
 void find_cmd(info_t *info)
 {
@@ -108,7 +108,7 @@ void find_cmd(info_t *info)
 	if (!k)
 		return; /* If no non-delimiter characters, return */
 
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]); /* Find executable's path */
+	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
@@ -131,9 +131,9 @@ void find_cmd(info_t *info)
  * fork_cmd - Forks a child process to run a command
  * @info: The parameter & return info struct containing command information
  *
- * This function creates a child process using fork() and executes the specified
- * command with the provided arguments. It waits for the child process to finish
- * and updates the exit status accordingly.
+ * This function creates a child process using fork() and executes the
+ * specified command with the provided arguments. It waits for the
+ * child process to finish and updates the exit status accordingly.
  */
 void fork_cmd(info_t *info)
 {

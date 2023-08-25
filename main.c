@@ -4,7 +4,6 @@
  * main - Entry point of the shell program.
  * @ac: Argument count.
  * @av: Argument vector.
- * 
  * Return: 0 on success, 1 on error.
  */
 
@@ -39,7 +38,7 @@ int main(int ac, char **av)
 		}
 		info->readfd = fd; /* Set readfd in the info struct */
 	}
-	populate_env_list(info); /* Populate the environment list in the info struct */
+	populate_env_list(info); /* Populate the enviro list in the info struct */
 	read_history(info); /* Read command history from a file */
 	hsh(info, av); /* Read command history from a file */
 	return (EXIT_SUCCESS); /* Return EXIT_SUCCESS on successful execution */

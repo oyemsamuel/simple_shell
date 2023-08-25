@@ -35,39 +35,70 @@
 
 extern char **environ;
 
+/**
+ * struct liststr - Node in a singly linked list for strings
+ * @num: Numeric value
+ * @str: String value
+ * @next: Pointer to next node
+ */
 typedef struct liststr
 {
 	int num;
 	char *str;
 	struct liststr *next;
 } list_t;
-
+/**
+ * struct passinfo - Contains data to pass into functions uniformly
+ * @arg: String generated from getline arguments
+ * @argv: Array of strings from arguments
+ * @path: String path for current command
+ * @argc: Argument count
+ * @line_count: Error count
+ * @err_num: Error code for exit()
+ * @linecount_flag: Flag to count input line
+ * @fname: Program filename
+ * @env: Linked list of local environ copies
+ * @environ: Custom modified environ from LL env
+ * @history: History node
+ * @alias: Alias node
+ * @env_changed: Flag for environ changes
+ ** @status: Return status of last exec'd command
+ * @cmd_buf: Pointer to cmd_buf, used for chaining
+ * @cmd_buf_type: Command type ||, &&, ;
+ * @readfd: FD for reading line input
+ * @histcount: History line number count
+ */
 typedef struct passinfo
 {
-    char *arg;
-    char **argv;
-    char *path;
-    int argc;
-    unsigned int line_count;
-    int err_num;
-    int linecount_flag;
-    char *fname;
-    list_t *env;
-    list_t *history;
-    list_t *alias;
-    char **environ;
-    int env_changed;
-    int status;
-    char **cmd_buf;
-    int cmd_buf_type;
-    int readfd;
-    int histcount;
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	list_t *env;
+	list_t *history;
+	list_t *alias;
+	char **environ;
+	int env_changed;
+	int status;
+	char **cmd_buf;
+	int cmd_buf_type;
+	int readfd;
+	int histcount;
 } info_t;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
 		0, 0, 0}
 
+/**
+ * struct builtin - Contains a builtin command and related function
+ * @type: Builtin command flag
+ * @func: Corresponding function
+ */
 typedef struct builtin
 {
 	char *type;

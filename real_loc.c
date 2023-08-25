@@ -42,7 +42,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	old_size = old_size < new_size ? old_size : new_size;
 	while (old_size--)
-		p[old_size] = ((char *)ptr)[old_size]; /* Copy contents from old to new memory */
+		p[old_size] = ((char *)ptr)[old_size]; /* Copy contents from old to new */
 
 	free(ptr); /* Free the old memory */
 	return (p); /* Return pointer to the new reallocated memory */

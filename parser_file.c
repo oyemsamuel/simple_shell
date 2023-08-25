@@ -17,7 +17,7 @@ char *dup_chars(char *pathstr, int start, int stop)
 		if (pathstr[i] != ':')
 			buf[k++] = pathstr[i];
 	buf[k] = 0;
-	return (buf); /* Return a new buffer containing characters from start to stop */
+	return (buf); /* Return a new buffer containing characters, start to stop */
 }
 
 /**

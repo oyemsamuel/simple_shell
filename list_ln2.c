@@ -15,12 +15,12 @@ char **list_to_strings(list_t *head)
 
 	if (!head || !i)
 		return (NULL);
-	strs = malloc(sizeof(char *) * (i + 1)); /* Allocate memory for an array of strings */
+	strs = malloc(sizeof(char *) * (i + 1)); /* Allocate memory to arr strings */
 	if (!strs)
 		return (NULL);
 	for (i = 0; node; node = node->next, i++)
 	{
-		str = malloc(_strlen(node->str) + 1); /* Allocate memory for each string */
+		str = malloc(_strlen(node->str) + 1); /* Allocate memory for each str */
 		if (!str)
 		{
 			for (j = 0; j < i; j++)
@@ -29,7 +29,7 @@ char **list_to_strings(list_t *head)
 			return (NULL);
 		}
 
-		str = _strcpy(str, node->str); /* Copy the string into the allocated memory */
+		str = _strcpy(str, node->str); /* Copy the str into the allocated memory */
 		strs[i] = str;
 	}
 	strs[i] = NULL; /* Set the last element of the array to NULL */
